@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shane & Sarah's Vegas Wedding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@300;400;500;600&family=Playfair+Display:wght@700&family=Montserrat&family=Roboto&family=Vina+Sans&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f5e7a3;
+            --black: #000000;
+            --dark-gray: #222222;
+            --beige: #D6BD9F;
+            --almond: #D6A686;
+            --cream: #F1DCCE;
+            --brown: #9F5832;
+            --dark-brown: #86452A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: var(--black);
+            color: var(--gold);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23d4af37' fill-opacity='0.1'%3E%3Cpath d='M30 30c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z'/%3E%3Cpath d='M15 45c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z'/%3E%3Cpath d='M45 45c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 0 15px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 10;
+            padding: 40px;
+            border: 4px double var(--gold);
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.8);
+            max-width: 800px;
+            width: 90%;
+            animation: fadeIn 1.5s ease-in-out;
+            box-shadow: 0 0 20px var(--gold), inset 0 0 10px var(--gold);
+        }
+        
+        .header-content:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
+        }
+        
+        .chip {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--gold) 20%, var(--gold-light) 40%, var(--gold) 60%);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--gold);
+            animation: fall 10s linear infinite;
+            z-index: 1;
+        }
+        
+        .chip::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            background: var(--black);
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+        }
+        
+        .chip::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            border: 2px dashed var(--gold);
+            border-radius: 50%;
+            top: 20%;
+            left: 20%;
+        }
+        
+        .dice {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 5px;
+            animation: rollDice 8s linear infinite;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .dice::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+            top: 15px;
+            left: 15px;
+        }
+        
+        .playing-card {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-color: white;
+            border-radius: 5px;
+            animation: flip 12s linear infinite;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .playing-card::before {
+            content: '♠';
+            position: absolute;
+            color: black;
+            font-size: 16px;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .playing-card::after {
+            content: '♥';
+            position: absolute;
+            color: red;
+            font-size: 16px;
+            bottom: 5px;
+            right: 5px;
+            transform: rotate(180deg);
+        }
+        
+        @keyframes rollDice {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes flip {
+            0% {
+                transform: translateY(-100vh) rotateY(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(0) rotateY(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotateY(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes glowing {
+            0% {
+                box-shadow: 0 0 10px var(--gold), inset 0 0 5px var(--gold);
+            }
+            50% {
+                box-shadow: 0 0 25px var(--gold), 0 0 40px var(--gold-light), inset 0 0 15px var(--gold);
+            }
+            100% {
+                box-shadow: 0 0 10px var(--gold), inset 0 0 5px var(--gold);
+            }
+        }
+        
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold), 0 0 20px var(--gold), 0 0 30px var(--gold), 0 0 40px var(--gold);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        
+        .title {
+            font-family: 'Vina Sans', cursive;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--gold);
+            color: var(--gold);
+            animation: neon-flicker 3s infinite alternate;
+        }
+        
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: 400;
+        }
+        
+        .date {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
+            padding: 10px 0;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        section {
+            padding: 60px 0;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 4px double var(--gold);
+            margin-bottom: 40px;
+            animation: fadeIn 1.5s ease-in-out;
+            box-shadow: 0 0 20px var(--gold), inset 0 0 10px var(--gold);
+        }
+        
+        section:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
+        }
+        
+        section h2 {
+            text-align: center;
+            font-family: 'Vina Sans', cursive;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            padding: 0 20px;
+        }
+        
+        .schedule h2::before, .schedule h2::after {
+            content: '♥';
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .dress-code h2::before, .dress-code h2::after {
+            content: '♦';
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .rsvp h2::before, .rsvp h2::after {
+            content: '♠';
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .schedule, .dress-code, .rsvp {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .event {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 3px solid var(--gold);
+            transition: transform 0.3s ease;
+        }
+        
+        .event:hover {
+            transform: translateX(10px);
+        }
+        
+        .event h3 {
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        
+        .event p {
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+        
+        .small-text {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--gold-light);
+            opacity: 0.9;
+        }
+        
+        .venue-link {
+            color: var(--gold-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px dotted var(--gold-light);
+        }
+        
+        .venue-link:hover {
+            color: var(--gold);
+            text-shadow: 0 0 5px var(--gold);
+        }
+        
+        .dress-code-colors {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 5px;
+            border: 2px solid var(--gold);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        .color-swatch:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px var(--gold);
+        }
+        
+        .color-gold {
+            background-color: var(--gold);
+        }
+        
+        .color-beige {
+            background-color: var(--beige);
+        }
+        
+        .color-almond {
+            background-color: var(--almond);
+        }
+        
+        .color-cream {
+            background-color: var(--cream);
+        }
+        
+        .color-brown {
+            background-color: var(--brown);
+        }
+        
+        .color-dark-brown {
+            background-color: var(--dark-brown);
+        }
+        
+        .color-black {
+            background-color: var(--black);
+            border: 2px solid var(--gold);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--gold), var(--gold-light), var(--gold));
+            background-size: 200% 100%;
+            color: var(--black);
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            animation: shimmer 3s infinite linear;
+            box-shadow: 0 0 15px var(--gold);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.9);
+        }
+        
+        #slot-machine {
+            width: 300px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background-color: var(--dark-gray);
+            border: 5px solid var(--gold);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px var(--gold);
+        }
+        
+        .slots-container {
+            display: flex;
+            justify-content: space-around;
+            height: 120px;
+            margin-top: 40px;
+        }
+        
+        .slot {
+            width: 80px;
+            height: 120px;
+            background-color: white;
+            border: 3px solid var(--gold);
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .slot-item {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 72px;
+            font-weight: bold;
+            position: absolute;
+            font-family: 'Vina Sans', cursive;
+            color: red;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .lever {
+            width: 20px;
+            height: 100px;
+            background-color: var(--gold);
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .lever::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: var(--gold-light);
+            border-radius: 50%;
+            bottom: -15px;
+            left: -5px;
+        }
+        
+        .lever:hover {
+            transform: rotate(-10deg);
+        }
+        
+        .lever.pulled {
+            transform: rotate(20deg);
+        }
+        
+        .jackpot {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 20px;
+            font-family: 'Vina Sans', cursive;
+            opacity: 0;
+            transition: opacity 1s ease;
+            text-shadow: 0 0 10px var(--gold);
+        }
+        
+        .active .jackpot {
+            opacity: 1;
+            text-shadow: 0 0 10px var(--gold);
+        }
+        
+        .neon-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 15px var(--gold), inset 0 0 30px var(--gold-light);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--gold);
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .date {
+                font-size: 1.4rem;
+            }
+            
+            section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .event h3 {
+                font-size: 1.5rem;
+            }
+            
+            .header-content {
+                padding: 20px;
+            }
+            
+            .chip {
+                width: 40px;
+                height: 40px;
+            }
+            
+            #slot-machine {
+                width: 250px;
+                height: 170px;
+            }
+            
+            .slots-container {
+                height: 100px;
+            }
+            
+            .slot {
+                width: 65px;
+                height: 100px;
+            }
+            
+            .slot-item {
+                font-size: 58px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div id="particle-container"></div>
+            <div class="header-content">
+                <h1 class="title">Shane & Sarah</h1>
+                <p class="subtitle">ARE TYING THE KNOT IN LAS VEGAS</p>
+                <p class="date">MAY 25, 2025</p>
+                
+                <div id="slot-machine">
+                    <div class="slots-container">
+                        <div class="slot" id="slot1">
+                            <div class="slot-item">7</div>
+                        </div>
+                        <div class="slot" id="slot2">
+                            <div class="slot-item">7</div>
+                        </div>
+                        <div class="slot" id="slot3">
+                            <div class="slot-item">7</div>
+                        </div>
+                    </div>
+                    <div class="lever" id="lever"></div>
+                    <div class="neon-border"></div>
+                </div>
+                <div class="jackpot">Jackpot! You're Invited!</div>
+                
+                <a href="#details" class="btn">View Details</a>
+            </div>
+        </header>
+        
+        <section id="details" class="schedule">
+            <h2>Wedding Schedule</h2>
+            <div class="event">
+                <h3>Ceremony</h3>
+                <p><strong>7:30 PM - 8:00 PM</strong></p>
+                <p>Join us at <a href="https://www.google.com/maps?q=Love+Story+Wedding+Chapel+704+S+6th+St,+Las+Vegas,+NV+89101" target="_blank" class="venue-link">Love Story Wedding Chapel</a></p>
+                <p>704 S 6th St, Las Vegas, NV 89101</p>
+            </div>
+            
+            <div class="event">
+                <h3>After-Party</h3>
+                <p><strong>8:30 PM - drunk</strong></p>
+                <p>Continue the celebration at <a href="https://www.google.com/maps?q=Atomic+Liquors+917+E+Fremont+St,+Las+Vegas,+NV+89101" target="_blank" class="venue-link">Atomic Liquors</a></p>
+                <p>917 E Fremont St, Las Vegas, NV 89101</p>
+                <p class="small-text">The venues are approximately 20 minutes apart on foot or 4 minutes by car.</p>
+            </div>
+            
+            <div class="event">
+                <h3>Accommodation</h3>
+                <p>The couple will be staying at <strong>Horseshoe Las Vegas</strong>.</p>
+                <p class="small-text">Guests are welcome to choose their own accommodations.</p>
+            </div>
+        </section>
+        
+        <section class="dress-code">
+            <h2>Dress Code</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Dressy Casual</p>
+            <p style="text-align: center; margin-bottom: 20px;">Recommended Colors:</p>
+            <div class="dress-code-colors">
+                <div class="color-swatch color-gold" title="Gold"></div>
+                <div class="color-swatch color-beige" title="Beige"></div>
+                <div class="color-swatch color-almond" title="Almond"></div>
+                <div class="color-swatch color-cream" title="Cream"></div>
+                <div class="color-swatch color-brown" title="Brown"></div>
+                <div class="color-swatch color-dark-brown" title="Dark Brown"></div>
+                <div class="color-swatch color-black" title="Black"></div>
+            </div>
+        </section>
+        
+        <section class="rsvp">
+            <h2>RSVP</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Please let us know if you can join us for our special day.</p>
+            <div style="text-align: center;">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3pA5Y81zrE2mFC6_klM4hefoPRynsCWb7Bg6SIWIzUVsW_g/viewform?usp=dialog" target="_blank" class="btn" id="rsvp-btn">RSVP NOW</a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>We look forward to celebrating with you!</p>
+            <p>Shane A. & Sarah L.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Create falling chips
+        function createChips() {
+            const particleContainer = document.getElementById('particle-container');
+            const chipCount = window.innerWidth > 768 ? 10 : 6;
+            const diceCount = window.innerWidth > 768 ? 5 : 3;
+            const cardCount = window.innerWidth > 768 ? 5 : 3;
+            
+            // Create chips
+            for (let i = 0; i < chipCount; i++) {
+                const chip = document.createElement('div');
+                chip.classList.add('chip');
+                
+                // Random position and delay
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = 7 + Math.random() * 6;
+                
+                chip.style.left = `${leftPos}%`;
+                chip.style.animationDelay = `${delay}s`;
+                chip.style.animationDuration = `${duration}s`;
+                
+                particleContainer.appendChild(chip);
+            }
+            
+            // Create dice
+            for (let i = 0; i < diceCount; i++) {
+                const dice = document.createElement('div');
+                dice.classList.add('dice');
+                
+                // Random position and delay
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = 8 + Math.random() * 4;
+                
+                dice.style.left = `${leftPos}%`;
+                dice.style.animationDelay = `${delay}s`;
+                dice.style.animationDuration = `${duration}s`;
+                
+                particleContainer.appendChild(dice);
+            }
+            
+            // Create playing cards
+            for (let i = 0; i < cardCount; i++) {
+                const card = document.createElement('div');
+                card.classList.add('playing-card');
+                
+                // Random position and delay
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = 12 + Math.random() * 4;
+                
+                card.style.left = `${leftPos}%`;
+                card.style.animationDelay = `${delay}s`;
+                card.style.animationDuration = `${duration}s`;
+                
+                particleContainer.appendChild(card);
+            }
+        }
+        
+        // Slot machine animation
+        function slotMachine() {
+            const lever = document.getElementById('lever');
+            const slotMachine = document.getElementById('slot-machine');
+            const slot1 = document.getElementById('slot1');
+            const slot2 = document.getElementById('slot2');
+            const slot3 = document.getElementById('slot3');
+            let isSpinning = false;
+            
+            function spinAnimation(slot, delay) {
+                return new Promise((resolve) => {
+                    const symbols = ['♥', '♦', '♣', '♠', '7'];
+                    let counter = 0;
+                    const interval = setInterval(() => {
+                        slot.querySelector('.slot-item').textContent = symbols[counter % symbols.length];
+                        counter++;
+                        
+                        if (counter > 20) {
+                            clearInterval(interval);
+                            slot.querySelector('.slot-item').textContent = '7';
+                            resolve();
+                        }
+                    }, 100);
+                    
+                    // Start with a delay
+                    setTimeout(() => {
+                        interval;
+                    }, delay);
+                });
+            }
+            
+            lever.addEventListener('click', () => {
+                if (isSpinning) return;
+                
+                isSpinning = true;
+                lever.classList.add('pulled');
+                
+                const headerContent = document.querySelector('.header-content');
+                headerContent.classList.remove('active');
+                
+                // Start spinning slots with different delays
+                Promise.all([
+                    spinAnimation(slot1, 0),
+                    spinAnimation(slot2, 500),
+                    spinAnimation(slot3, 1000)
+                ]).then(() => {
+                    // Show jackpot message
+                    setTimeout(() => {
+                        headerContent.classList.add('active');
+                        lever.classList.remove('pulled');
+                        isSpinning = false;
+                    }, 500);
+                });
+            });
+            
+            // Trigger slot machine automatically after page load
+            setTimeout(() => {
+                lever.click();
+            }, 1000);
+        }
+        
+        // Smooth scrolling for anchor links
+        function smoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 50,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        }
+        
+        // Initialize all functions when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createChips();
+            slotMachine();
+            smoothScroll();
+            
+            // Add glowing animation to header
+            const headerContent = document.querySelector('.header-content');
+            headerContent.style.animation = 'fadeIn 1.5s ease-in-out, glowing 3s infinite';
+        });
+    </script>
+</body>
+</html>
