@@ -6,7 +6,7 @@
     <title>Shane & Sarah's Vegas Wedding</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lobster&family=Playfair+Display:wght@700&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Oswald:wght@300;400;500;600&family=Playfair+Display:wght@700&family=Montserrat&family=Roboto&family=Vina+Sans&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #d4af37;
@@ -33,6 +33,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='%23d4af37' fill-opacity='0.1'%3E%3Cpath d='M30 30c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z'/%3E%3Cpath d='M15 45c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z'/%3E%3Cpath d='M45 45c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z'/%3E%3C/g%3E%3C/svg%3E");
         }
         
         .container {
@@ -110,6 +111,88 @@
             left: 20%;
         }
         
+        .dice {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 5px;
+            animation: rollDice 8s linear infinite;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .dice::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+            top: 15px;
+            left: 15px;
+        }
+        
+        .playing-card {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background-color: white;
+            border-radius: 5px;
+            animation: flip 12s linear infinite;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .playing-card::before {
+            content: '♠';
+            position: absolute;
+            color: black;
+            font-size: 16px;
+            top: 5px;
+            left: 5px;
+        }
+        
+        .playing-card::after {
+            content: '♥';
+            position: absolute;
+            color: red;
+            font-size: 16px;
+            bottom: 5px;
+            right: 5px;
+            transform: rotate(180deg);
+        }
+        
+        @keyframes rollDice {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes flip {
+            0% {
+                transform: translateY(-100vh) rotateY(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(0) rotateY(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotateY(360deg);
+                opacity: 0;
+            }
+        }
+        
         @keyframes fall {
             0% {
                 transform: translateY(-100vh) rotate(0deg);
@@ -147,6 +230,15 @@
             }
         }
         
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold), 0 0 15px var(--gold), 0 0 20px var(--gold), 0 0 30px var(--gold), 0 0 40px var(--gold);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        
         @keyframes shimmer {
             0% {
                 background-position: -100% 0;
@@ -157,20 +249,22 @@
         }
         
         .title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-family: 'Vina Sans', cursive;
+            font-size: 4rem;
             margin-bottom: 10px;
             text-shadow: 0 0 10px var(--gold);
             color: var(--gold);
+            animation: neon-flicker 3s infinite alternate;
         }
         
         .subtitle {
-            font-family: 'Lobster', cursive;
-            font-size: 1.6rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
             margin-bottom: 30px;
             letter-spacing: 2px;
             color: var(--gold-light);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: 400;
         }
         
         .date {
@@ -211,7 +305,7 @@
         
         section h2 {
             text-align: center;
-            font-family: 'Lobster', cursive;
+            font-family: 'Vina Sans', cursive;
             font-size: 2.2rem;
             margin-bottom: 30px;
             position: relative;
@@ -223,8 +317,22 @@
             padding: 0 20px;
         }
         
-        section h2::before, section h2::after {
+        .schedule h2::before, .schedule h2::after {
+            content: '♥';
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .dress-code h2::before, .dress-code h2::after {
             content: '♦';
+            margin: 0 15px;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .rsvp h2::before, .rsvp h2::after {
+            content: '♠';
             margin: 0 15px;
             font-size: 1.5rem;
             color: var(--gold);
@@ -392,7 +500,7 @@
             font-size: 72px;
             font-weight: bold;
             position: absolute;
-            font-family: 'Lobster', cursive;
+            font-family: 'Vina Sans', cursive;
             color: red;
             text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
         }
@@ -432,7 +540,7 @@
             text-align: center;
             font-size: 2rem;
             margin-top: 20px;
-            font-family: 'Lobster', cursive;
+            font-family: 'Vina Sans', cursive;
             opacity: 0;
             transition: opacity 1s ease;
             text-shadow: 0 0 10px var(--gold);
@@ -441,6 +549,17 @@
         .active .jackpot {
             opacity: 1;
             text-shadow: 0 0 10px var(--gold);
+        }
+        
+        .neon-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: inset 0 0 15px var(--gold), inset 0 0 30px var(--gold-light);
+            border-radius: 5px;
+            pointer-events: none;
         }
         
         footer {
@@ -508,7 +627,7 @@
             <div class="header-content">
                 <h1 class="title">Shane & Sarah</h1>
                 <p class="subtitle">ARE TYING THE KNOT IN LAS VEGAS</p>
-                <p class="date">MAY 25</p>
+                <p class="date">MAY 25, 2025</p>
                 
                 <div id="slot-machine">
                     <div class="slots-container">
@@ -523,6 +642,7 @@
                         </div>
                     </div>
                     <div class="lever" id="lever"></div>
+                    <div class="neon-border"></div>
                 </div>
                 <div class="jackpot">Jackpot! You're Invited!</div>
                 
@@ -541,7 +661,7 @@
             
             <div class="event">
                 <h3>After-Party</h3>
-                <p><strong>8:30 PM</strong></p>
+                <p><strong>8:30 PM - drunk</strong></p>
                 <p>Continue the celebration at <a href="https://www.google.com/maps?q=Atomic+Liquors+917+E+Fremont+St,+Las+Vegas,+NV+89101" target="_blank" class="venue-link">Atomic Liquors</a></p>
                 <p>917 E Fremont St, Las Vegas, NV 89101</p>
                 <p class="small-text">The venues are approximately 20 minutes apart on foot or 4 minutes by car.</p>
@@ -587,8 +707,11 @@
         // Create falling chips
         function createChips() {
             const particleContainer = document.getElementById('particle-container');
-            const chipCount = window.innerWidth > 768 ? 15 : 8;
+            const chipCount = window.innerWidth > 768 ? 10 : 6;
+            const diceCount = window.innerWidth > 768 ? 5 : 3;
+            const cardCount = window.innerWidth > 768 ? 5 : 3;
             
+            // Create chips
             for (let i = 0; i < chipCount; i++) {
                 const chip = document.createElement('div');
                 chip.classList.add('chip');
@@ -603,6 +726,40 @@
                 chip.style.animationDuration = `${duration}s`;
                 
                 particleContainer.appendChild(chip);
+            }
+            
+            // Create dice
+            for (let i = 0; i < diceCount; i++) {
+                const dice = document.createElement('div');
+                dice.classList.add('dice');
+                
+                // Random position and delay
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = 8 + Math.random() * 4;
+                
+                dice.style.left = `${leftPos}%`;
+                dice.style.animationDelay = `${delay}s`;
+                dice.style.animationDuration = `${duration}s`;
+                
+                particleContainer.appendChild(dice);
+            }
+            
+            // Create playing cards
+            for (let i = 0; i < cardCount; i++) {
+                const card = document.createElement('div');
+                card.classList.add('playing-card');
+                
+                // Random position and delay
+                const leftPos = Math.random() * 100;
+                const delay = Math.random() * 10;
+                const duration = 12 + Math.random() * 4;
+                
+                card.style.left = `${leftPos}%`;
+                card.style.animationDelay = `${delay}s`;
+                card.style.animationDuration = `${duration}s`;
+                
+                particleContainer.appendChild(card);
             }
         }
         
